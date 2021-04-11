@@ -1,7 +1,10 @@
+from uwuBotFunc import EngToUwu
+
 import random
 import json
 import pickle
 import numpy as np
+import time
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -9,14 +12,18 @@ lemmatizer = WordNetLemmatizer()
 
 import tensorflow as tf
 
+uwu = True      # global variable that controls if the bot speaks in uwu
+
 with open('uwu_intents.json') as file:
     intents_json = json.load(file)  
-    try:
-        with open('data.pickle', 'rb') as f:
-            words, labels = pickle.load(f)
-        model = tf.keras.models.load_model('UwUchat.h5')
-    except:
-        print("oopsie, I'm missing data, please train me :3")
+with open('jokes.json') as file:
+    jokes = json.load(file)
+try:
+    with open('data.pickle', 'rb') as f:
+        words, labels = pickle.load(f)
+    model = tf.keras.models.load_model('UwUchat.h5')
+except:
+    print("oopsie, I'm missing data, please train me :3")
 
 
 def clean_sentence(sentence):
@@ -65,12 +72,51 @@ def get_response(intents_list, intents_json):
 def converse(message):
     ints = predict_intent(message)
     res = get_response(ints, intents_json)
-    return "UwU: " + res
+    if uwu:
+        res = EngToUwu(res)
+    return res
+
+def commands(message):
+    global uwu
+    message = message.split(' ', 1) # splits the string into the first word, and the rest of the string
+    command = message[0]     
+    if command == "!echo":
+        try:
+            text = message[1]
+            print(text)
+        except:
+            print("command usage: !echo [text to echo]")
+    elif command == "!translate": 
+        try:
+            text = message[1]
+            print(EngToUwu(text))
+        except:
+            print("command usage: !translate [text to translate]")
+    elif command == "!uwuon":
+        uwu = True
+        print("Weady two UWU")
+    elif command == "!uwuoff":
+        uwu = False
+        print("No more uwu :(")
+    elif command == "!joke":
+        joke = random.choice(jokes)
+        if uwu:
+            joke[0] = EngToUwu(joke[0])
+            joke[1] = EngToUwu(joke[1])
+        print(joke[0])
+        time.sleep(2)
+        print(joke[1])
+    else:
+        print("Unknown command")
 
 
 if __name__ == "__main__":
     while True:
         message = input("You: ")
+        if message[0] == "!":
+            commands(message)
+            continue
         if message == 'quit':
             break
-        print(converse(message))
+        print("UwU: " + converse(message))
+    print("Conversation ended")

@@ -1,6 +1,6 @@
 from uwuBotFunc import EngToUwu
 from uwuchat import converse
-
+from uwuchat import commands
 
 def printOptions():
     """
@@ -20,23 +20,14 @@ def translator(string):
     print()
 
 def chatbot():
-    uwu = True
-    print()
     while True:
         message = input("You: ")
-        if message == "quit":
+        if message[0] == "!":
+            commands(message)
+            continue
+        if message == 'quit':
             break
-        if message == "uwuOff":
-            uwu = False
-            continue
-        if message == "uwuOn":      # toggle for uwu responses, can incorporate into chatbot later
-            uwu = True
-            continue
-        
-        if uwu:
-            print(EngToUwu(converse(message)))
-        else:
-            print(converse(message))
+        print("UwU: " + converse(message))
     print()
 
 
