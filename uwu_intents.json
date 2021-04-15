@@ -1,0 +1,26 @@
+{"intents":[
+    {"tag":"greeting",
+    "patterns": ["hi", "hello", "howdy"],
+    "responses": ["Hello!", "Welcome!", "I'm so excited to meet you!"]
+    },
+    {"tag":"opening_question",
+    "patterns": ["how are you", "how's it going", "what's up", "sup"],
+    "responses": ["I'm well.", "Not too bad, you?", "It's going."]
+    },
+    {"tag":"goodbye",
+    "patterns": ["bye", "see ya", "cya"],
+    "responses": ["Aw, bye.", "See you soon.", "Talk to you later."]
+    },
+    {"tag":"thanks",
+    "patterns": ["thanks", "thank you"],
+    "responses": ["You're welcome.", "Happy to help."]
+    },
+    {"tag":"open_question",
+    "patterns": ["Who", "What", "Where", "When", "Why", "How"],
+    "responses": ["I don't know.", "I'm not Google.", "Go Google that."]
+    },
+    {"tag":"closed_question",
+    "patterns": ["?"],
+    "responses": ["Ask again later", "Yes!", "No"]
+    }
+]}

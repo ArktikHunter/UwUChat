@@ -1,4 +1,6 @@
 from uwuBotFunc import EngToUwu
+from uwuchat import converse
+from uwuchat import commands
 
 def printOptions():
     """
@@ -12,14 +14,20 @@ def printOptions():
     print("3. Quit the application")
     return input(">")
 
-def translator(string):
-    output = EngToUwu(string)
-    print(output)
+def translator(string): 
+    print()
+    print(EngToUwu(string))
     print()
 
 def chatbot():
-    print()
-    print("Functionality not implemented yet")
+    while True:
+        message = input("You: ")
+        if message[0] == "!":
+            commands(message)
+            continue
+        if message == 'quit':
+            break
+        print("UwU: " + converse(message))
     print()
 
 
@@ -49,7 +57,7 @@ def start():
         if choice == "1":
             string = input("Enter text to translate>")
             # translate text; otherwise go back to home screen if user wishes to quit
-            if not string == 'q:':
+            if not string == 'q':
                 translator(string)
             else:
                 feature_running = False
