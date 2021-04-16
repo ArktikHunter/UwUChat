@@ -1,6 +1,8 @@
 # functions for uwuBot
 
 def EngToUwu(string):
+    import re as re
+    
     """
     Converts a string from english to uwu
     input: string - a string in english
@@ -25,8 +27,11 @@ def EngToUwu(string):
     out = out.replace("'", "")
     
     #todo: adjust so ur !-> uw
+    out = re.sub(r" uw ", r" ur ", out, flags=re.IGNORECASE)
     #todo: insert w after u if there's another vowel graduated -> graduwated
+    out = re.sub(r"u([a|e|i|o|u])", r"uw\1", out, flags=re.IGNORECASE)
     #todo: insert y into na, ne, no, nu but trained !-> trainyed
+    out = re.sub(r"\bn([a|e|i|o|u])", r" ny\1", out)
 
 
     return out
@@ -43,5 +48,7 @@ Not only am I extensively trained in unarmed combat, but I have access to the en
 But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it.
 
 You’re fucking dead, kiddo.\n"""
-    print(test)
-    print(EngToUwu(test))
+    test2 = """I’ll have you know I graduated top of my class in the Navy Seals...and your IP is being traced right now so you better prepare for the storm,"""
+    print(test2)
+    print()
+    print(EngToUwu("I have been trained at your graduated network"))
