@@ -29,8 +29,10 @@ def EngToUwu(string):
     #todo: adjust so ur !-> uw
     out = re.sub(r" uw ", r" ur ", out, flags=re.IGNORECASE)
     #todo: insert w after u if there's another vowel graduated -> graduwated
-    out = re.sub(r"u([a|e|i|o|u])", r"uw\1", out, flags=re.IGNORECASE)
+    out = re.sub(r"u([a|e|i|o])", r"uw\1", out, flags=re.IGNORECASE)
     #todo: insert y into na, ne, no, nu but trained !-> trainyed
+            # only substituting at the front of the word should leave out cases where the 'ne' is unstressed
+            # so 'network' becomes 'nyetwork' but 'trained' does NOT become 'trainyed'
     out = re.sub(r"\bn([a|e|i|o|u])", r" ny\1", out)
 
     return out
