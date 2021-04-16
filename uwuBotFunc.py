@@ -33,7 +33,6 @@ def EngToUwu(string):
     #todo: insert y into na, ne, no, nu but trained !-> trainyed
     out = re.sub(r"\bn([a|e|i|o|u])", r" ny\1", out)
 
-
     return out
 
 if __name__ == "__main__":
@@ -51,4 +50,4 @@ You’re fucking dead, kiddo.\n"""
     test2 = """I’ll have you know I graduated top of my class in the Navy Seals...and your IP is being traced right now so you better prepare for the storm,"""
     print(test2)
     print()
-    print(EngToUwu("I have been trained at your graduated network"))
+    print(EngToUwu("I have been trained at your graduated network in uranium"))
